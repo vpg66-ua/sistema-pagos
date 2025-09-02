@@ -1,0 +1,43 @@
+<div class="container">
+    <mat-card [formGroup]="pagoFormGroup" class="pago-form">
+        <mat-card-header>
+            <mat-card-title>Nuevo Pago</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label>Fecha de pago</mat-label>
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <input matInput [matDatepicker]="picker" formControlName="fecha">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" formControlName="cantidad">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Tipos de pago</mat-label>
+                <mat-select formControlName="tipoPago">
+                    <mat-option *ngFor="let tipo of tiposPago" [value]="tipo">
+                        {{ tipo }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Código Estudiante</mat-label>
+                <input matInput type="string" formControlName="codigoEstudiante">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Archivo del pago</mat-label>
+                <button type="button" mat-icon-button matPrefix (click)="f_input.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <input matInput readonly formControlName="fileName">
+                <input type="file" #f_input (change)="selectFile($event)" hidden>
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="guardarPago()">Guardar Pago</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</div>
